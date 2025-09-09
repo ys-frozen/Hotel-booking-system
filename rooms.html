@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room Reservation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+       /* General Page Styling */
+/* General Page Styling */
+body {
+    background: linear-gradient(to right, #E3F2FD, #B2EBF2);
+    font-family: Arial, sans-serif;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100vh;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Main Container */
+.reservation-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 80%;
+    max-width: 1200px;
+    gap: 20px;
+}
+
+/* Form & Info Box Styling */
+.reservation-form, .user-info, .description-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    width: 50%;
+    text-align: left;
+    transition: transform 0.2s ease-in-out;
+}
+
+.reservation-form:hover, .user-info:hover, .description-container:hover {
+    transform: scale(1.02);
+}
+
+/* Logo Styling */
+.reservation-form img {
+    width: 80px;
+    margin-bottom: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Label & Input Styling */
+label {
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: inline-block;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    background: #E3F2FD;
+    border-radius: 5px;
+    padding: 8px;
+}
+
+.input-group i {
+    font-size: 1.4em;
+    color: #0277BD;
+    margin-right: 10px;
+    width: 35px;
+    text-align: center;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #90CAF9;
+    border-radius: 5px;
+    color: #333;
+    outline: none;
+    background: #E1F5FE;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: #0288D1;
+    box-shadow: 0 0 5px rgba(2, 136, 209, 0.5);
+}
+
+/* Button Styling */
+button {
+    padding: 12px 20px;
+    font-size: 1.1em;
+    background-color: #0288D1;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease-in-out;
+}
+
+button:hover {
+    background-color: #01579B;
+    transform: scale(1.05);
+}
+
+/* Description Section */
+.description-container {
+    width: 40%;
+    font-size: 1.1em;
+}
+
+.description-container ul {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+.description-container li {
+    margin-bottom: 10px;
+}
+
+/* User Info Display */
+.user-info {
+    display: none;
+    margin-top: 20px;
+}
+    </style>
+</head>
+<body>
+
+    <div class="reservation-container">
+        <!-- Reservation Form -->
+        <div class="reservation-form">
+            <img src="hotel.png" alt="Hotel Icon"> <!-- Placeholder image -->
+            <h1>Room Reservation Form</h1>
+
+            <form id="reservation-form" onsubmit="event.preventDefault(); showUserInfo();">
+                <!-- Check-in Date -->
+                <div class="input-group">
+                    <i class="fas fa-calendar-alt"></i>
+                    <label for="check-in">Check-in Date:</label>
+                    <input type="date" id="check-in" name="check-in" required>
+                </div>
+
+                <!-- Check-out Date -->
+                <div class="input-group">
+                    <i class="fas fa-calendar-alt"></i>
+                    <label for="check-out">Check-out Date:</label>
+                    <input type="date" id="check-out" name="check-out" required>
+                </div>
+
+                <!-- Room Type -->
+                <div class="input-group">
+                    <i class="fas fa-bed"></i>
+                    <label for="room-type">Room Type:</label>
+                    <select id="room-type" name="room-type" required>
+                        <option value="single">Single Room</option>
+                        <option value="double">Double Room</option>
+                        <option value="suite">Suite</option>
+                        <option value="deluxe">Deluxe</option>
+                        <option value="luxury">Luxury</option>
+                        <option value="executive">Executive</option>
+
+
+                    </select>
+                </div>
+
+                <!-- Guest Name -->
+                <div class="input-group">
+                    <i class="fas fa-user"></i>
+                    <label for="guest-name">Guest Name:</label>
+                    <input type="text" id="guest-name" name="guest-name" placeholder="Enter your name" required>
+                </div>
+
+                <!-- Email Address -->
+                <div class="input-group">
+                    <i class="fas fa-envelope"></i>
+                    <label for="email">Email Address:</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                </div>
+
+                <!-- Phone Number -->
+                <div class="input-group">
+                    <i class="fas fa-phone-alt"></i>
+                    <label for="phone">Phone Number:</label>
+                    <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+                </div>
+
+                <!-- Number of Adults -->
+                <div class="input-group">
+                    <i class="fas fa-users"></i>
+                    <label for="adults">Number of Adults:</label>
+                    <input type="number" id="adults" name="adults" min="1" required>
+                </div>
+
+                <!-- Number of Children -->
+                <div class="input-group">
+                    <i class="fas fa-users"></i>
+                    <label for="children">Number of Children:</label>
+                    <input type="number" id="children" name="children" min="0">
+                </div>
+
+                <!-- Special Requests -->
+                <div class="input-group">
+                    <i class="fas fa-comments"></i>
+                    <label for="special-requests">Special Requests:</label>
+                    <textarea id="special-requests" name="special-requests" placeholder="Any special requests or preferences?"></textarea>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit">Reserve Room</button>
+            </form>
+        </div>
+
+        <!-- Room Reservation Description -->
+        <div class="description-container">
+            <h2>Why Reserve a Room?</h2>
+            <ul>
+                <li>Easy online booking from anywhere</li>
+                <li>Multiple room types to choose from</li>
+                <li>Secure online payments and reservations</li>
+                <li>24/7 customer support for your convenience</li>
+            </ul>
+            <h2>Room Pricing</h2>
+            <table class="pricing-table">
+                <tr>
+                    <th>Room Type</th>
+                    <th>Priority</th>
+                    <th>Price (per night)</th>
+                </tr>
+                <tr><td>Luxury</td><td>High</td><td>$500</td></tr>
+                <tr><td>Deluxe</td><td>High</td><td>$400</td></tr>
+                <tr><td>Suite</td><td>Medium</td><td>$350</td></tr>
+                <tr><td>Executive</td><td>Medium</td><td>$300</td></tr>
+                <tr><td>Double Room</td><td>Low</td><td>$250</td></tr>
+                <tr><td>Single Room</td><td>Low</td><td>$200</td></tr>
+            </table>
+
+        </div>
+    </div>
+
+    <!-- Display User Info -->
+    <div id="userInfo" class="user-info">
+        <h3>Your Reservation:</h3>
+        <p><strong>Name:</strong> <span id="displayName"></span></p>
+        <p><strong>Email:</strong> <span id="displayEmail"></span></p>
+        <p><strong>Phone:</strong> <span id="displayPhone"></span></p>
+        <p><strong>Check-in Date:</strong> <span id="displayCheckIn"></span></p>
+        <p><strong>Check-out Date:</strong> <span id="displayCheckOut"></span></p>
+        <p><strong>Room Type:</strong> <span id="displayRoomType"></span></p>
+        <p><strong>Adults:</strong> <span id="displayAdults"></span></p>
+        <p><strong>Children:</strong> <span id="displayChildren"></span></p>
+        <p><strong>Special Requests:</strong> <span id="displayRequests"></span></p>
+    </div>
+
+    <script>
+        function showUserInfo() {
+            // Get form data
+            const name = document.getElementById("guest-name").value;
+            const email = document.getElementById("email").value;
+            const phone = document.getElementById("phone").value;
+            const checkIn = document.getElementById("check-in").value;
+            const checkOut = document.getElementById("check-out").value;
+            const roomType = document.getElementById("room-type").value;
+            const adults = document.getElementById("adults").value;
+            const children = document.getElementById("children").value;
+            const requests = document.getElementById("special-requests").value;
+
+            // Display the user data
+            document.getElementById("displayName").innerText = name;
+            document.getElementById("displayEmail").innerText = email;
+            document.getElementById("displayPhone").innerText = phone;
+            document.getElementById("displayCheckIn").innerText = checkIn;
+            document.getElementById("displayCheckOut").innerText = checkOut;
+            document.getElementById("displayRoomType").innerText = roomType;
+            document.getElementById("displayAdults").innerText = adults;
+            document.getElementById("displayChildren").innerText = children;
+            document.getElementById("displayRequests").innerText = requests;
+
+            // Show the user info for 5 seconds
+            document.getElementById("userInfo").style.display = "block";
+
+            // Redirect to success page after 5 seconds
+            setTimeout(function() {
+                window.location.href = "thank_you.html"; // Create a thank you page
+            }, 5000);
+        }
+    </script>
+</body>
+</html>

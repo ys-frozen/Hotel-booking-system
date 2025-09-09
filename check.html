@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check-In / Check-Out</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: linear-gradient(to right, #E3F2FD, #B2EBF2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .main-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 900px;
+            width: 100%;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            color: black;
+            width: 400px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        .form-box {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+        }
+        .description {
+            text-align: left;
+            max-width: 300px;
+            color: black;
+        }
+        .description h3 {
+            color: #007bff;
+        }
+        .description ul {
+            padding-left: 20px;
+        }
+        .description li {
+            margin-bottom: 10px;
+        }
+        input, select, button, textarea {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            border: none;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+            display: none;
+        }
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            .description {
+                text-align: center;
+            }
+        }
+    </style>
+    <script>
+        function submitForm() {
+            var email = document.getElementById("email").value;
+            var phone = document.getElementById("phone").value;
+            var checkIn = document.getElementById("check-in").value;
+            var checkOut = document.getElementById("check-out").value;
+            var roomNumber = document.getElementById("room-number").value;
+            var guests = document.getElementById("guests").value;
+            var specialRequests = document.getElementById("special-requests").value;
+            var errorMessage = document.getElementById("error-message");
+
+            if (!email || !phone || !checkIn || !checkOut || !roomNumber || !guests) {
+                alert("Please fill in all fields.");
+                return;
+            }
+
+            if (new Date(checkOut) <= new Date(checkIn)) {
+                errorMessage.style.display = "block";
+                return;
+            } else {
+                errorMessage.style.display = "none";
+            }
+
+            localStorage.setItem('userEmail', email);
+            localStorage.setItem('userPhone', phone);
+            localStorage.setItem('checkInDate', checkIn);
+            localStorage.setItem('checkOutDate', checkOut);
+            localStorage.setItem('roomNumber', roomNumber);
+            localStorage.setItem('guestCount', guests);
+            localStorage.setItem('specialRequests', specialRequests);
+
+            console.log("Data Stored:", localStorage);
+
+            setTimeout(function() {
+                window.location.href = 'confirmation.html';
+            }, 5000);
+        }
+    </script>
+</head>
+<body>
+    <div class="main-container">
+        <div class="container">
+            <h2>Check-In / Check-Out</h2>
+            <div class="form-box">
+                <form onsubmit="event.preventDefault(); submitForm();">
+                    <input type="email" id="email" placeholder="Enter your Email" required>
+                    <input type="tel" id="phone" placeholder="Enter your Phone Number" required>
+                    <input type="date" id="check-in" required>
+                    <input type="date" id="check-out" required>
+                    <input type="text" id="room-number" placeholder="Room Number" required>
+                    <input type="number" id="guests" placeholder="Number of Guests" min="1" required>
+                    <textarea id="special-requests" placeholder="Special Requests (Optional)"></textarea>
+                    <p id="error-message" class="error">Check-out date must be after check-in date!</p>
+                    <button type="submit">Proceed</button>
+                </form>
+            </div>
+        </div>
+        <div class="description">
+            <h3>Check-In / Check-Out Guide</h3>
+            <ul>
+                <li>🔹 Enter your **email** and **phone number** for verification.</li>
+                <li>🔹 Select your **check-in** and **check-out** dates.</li>
+                <li>🔹 Provide your **room number** and **number of guests**.</li>
+                <li>🔹 Add any **special requests** if needed.</li>
+                <li>🔹 Click **Proceed** to confirm your details.</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

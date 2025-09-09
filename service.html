@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Room Service Request</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #E3F2FD, #B2EBF2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .container {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 350px;
+      text-align: center;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 8px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      padding: 10px 18px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .submit-btn {
+      width: 100%;
+      background-color: #007bff;
+      color: white;
+    }
+
+    .submit-btn:hover {
+      background-color: #0056b3;
+    }
+
+    .back-btn {
+      background-color: #007bff;
+      color: white;
+      display: none; /* hidden by default */
+      margin-top: 15px;
+    }
+
+    .back-btn:hover {
+      background-color: #0056b3;
+    }
+
+    .summary {
+      display: none;
+      margin-top: 20px;
+      background: #ffffff;
+      padding: 15px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container" id="formContainer">
+    <h2>Room Service Request</h2>
+    <form id="serviceForm">
+      <input type="text" id="guestName" placeholder="Guest Name" required>
+      <input type="number" id="roomNumber" placeholder="Room Number" required>
+      <select id="serviceType" required>
+        <option value="">Select Service Type</option>
+        <option value="Food">Food Delivery</option>
+        <option value="Housekeeping">Housekeeping</option>
+        <option value="Laundry">Laundry</option>
+        <option value="Maintenance">Maintenance</option>
+      </select>
+      <textarea id="requestDetails" rows="3" placeholder="Request Details" required></textarea>
+      <label for="urgency">Urgency Level:</label>
+      <input type="range" id="urgency" min="1" max="5">
+      <label for="preferredTime">Preferred Time:</label>
+      <input type="time" id="preferredTime">
+      <button type="submit" class="submit-btn">Submit Request</button>
+    </form>
+  </div>
+
+  <!-- Summary Section (Hidden initially) -->
+  <div class="container summary" id="summaryContainer">
+    <h2>Service Request Summary</h2>
+    <p><strong>Guest Name:</strong> <span id="summaryGuestName"></span></p>
+    <p><strong>Room Number:</strong> <span id="summaryRoomNumber"></span></p>
+    <p><strong>Service Type:</strong> <span id="summaryServiceType"></span></p>
+    <p><strong>Details:</strong> <span id="summaryRequestDetails"></span></p>
+    <p><strong>Urgency:</strong> <span id="summaryUrgency"></span></p>
+    <p><strong>Preferred Time:</strong> <span id="summaryPreferredTime"></span></p>
+  </div>
+
+  <!-- Back to Main Menu Button (Hidden initially) -->
+  <button class="back-btn" id="backBtn" onclick="goToMainMenu()">⬅ Back to Main Menu</button>
+
+  <script>
+    document.getElementById("serviceForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+      
+      // Collect user inputs
+      let guestName = document.getElementById("guestName").value;
+      let roomNumber = document.getElementById("roomNumber").value;
+      let serviceType = document.getElementById("serviceType").value;
+      let requestDetails = document.getElementById("requestDetails").value;
+      let urgency = document.getElementById("urgency").value;
+      let preferredTime = document.getElementById("preferredTime").value;
+
+      // Hide form and show summary
+      document.getElementById("formContainer").style.display = "none";
+      document.getElementById("summaryContainer").style.display = "block";
+
+      // Display submitted data
+      document.getElementById("summaryGuestName").textContent = guestName;
+      document.getElementById("summaryRoomNumber").textContent = roomNumber;
+      document.getElementById("summaryServiceType").textContent = serviceType;
+      document.getElementById("summaryRequestDetails").textContent = requestDetails;
+      document.getElementById("summaryUrgency").textContent = urgency;
+      document.getElementById("summaryPreferredTime").textContent = preferredTime;
+
+      // Show Back button after 2 seconds
+      setTimeout(() => {
+        document.getElementById("backBtn").style.display = "inline-block";
+      }, 2000);
+    });
+
+    function goToMainMenu() {
+      window.location.href = "welcome.html"; // Change this to the actual main menu page URL
+    }
+  </script>
+
+</body>
+</html>

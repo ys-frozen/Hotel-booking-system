@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guest Feedback & Follow-up</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: linear-gradient(to right, #E3F2FD, #B2EBF2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.container {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 400px;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 8px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.hidden {
+    display: none;
+}
+
+    </style>
+</head>
+<body>
+
+    <div class="container" id="feedbackForm">
+        <h2>Guest Feedback & Follow-up</h2>
+        <form id="feedback">
+            <input type="text" id="name" placeholder="Guest Name" required>
+            <input type="email" id="email" placeholder="Email" required>
+            <input type="tel" id="phone" placeholder="Phone Number" required>
+            <select id="feedbackType" required>
+                <option value="">Select Feedback Type</option>
+                <option value="Service">Service</option>
+                <option value="Cleanliness">Cleanliness</option>
+                <option value="Food Quality">Food Quality</option>
+                <option value="Staff Behavior">Staff Behavior</option>
+            </select>
+            <input type="number" id="rating" placeholder="Rating (1-5)" min="1" max="5" required>
+            <textarea id="comments" placeholder="Additional Comments" rows="4"></textarea>
+            <button type="button" onclick="submitFeedback()">Submit</button>
+        </form>
+    </div>
+
+    <div class="container hidden" id="feedbackDetails">
+        <h2>Feedback Submitted</h2>
+        <p id="displayData"></p>
+    </div>
+
+    <script>
+        function submitFeedback() {
+            let name = document.getElementById("name").value;
+            let email = document.getElementById("email").value;
+            let phone = document.getElementById("phone").value;
+            let feedbackType = document.getElementById("feedbackType").value;
+            let rating = document.getElementById("rating").value;
+            let comments = document.getElementById("comments").value;
+
+            if (!name || !email || !phone || !feedbackType || !rating) {
+                alert("Please fill all required fields.");
+                return;
+            }
+
+            let displayData = `
+                <strong>Name:</strong> ${name}<br>
+                <strong>Email:</strong> ${email}<br>
+                <strong>Phone:</strong> ${phone}<br>
+                <strong>Feedback Type:</strong> ${feedbackType}<br>
+                <strong>Rating:</strong> ${rating}/5<br>
+                <strong>Comments:</strong> ${comments}
+            `;
+
+            document.getElementById("feedbackForm").classList.add("hidden");
+            document.getElementById("feedbackDetails").classList.remove("hidden");
+            document.getElementById("displayData").innerHTML = displayData;
+
+            setTimeout(() => {
+                window.location.href = "fthank.html";
+            }, 5000);
+        }
+    </script>
+
+</body>
+</html>

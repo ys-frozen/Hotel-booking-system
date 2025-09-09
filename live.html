@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hotel Chat</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to right, #E3F2FD, #B2EBF2);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    /* Chat container */
+    .chat-container {
+      width: 100%;
+      max-width: 420px;
+      height: 95vh;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+
+    /* Header */
+    .chat-header {
+      background: #0288d1;
+      color: white;
+      padding: 15px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+    }
+
+    .chat-header span {
+      margin-left: 10px;
+    }
+
+    /* Messages area */
+    .chat-messages {
+      flex: 1;
+      padding: 15px;
+      overflow-y: auto;
+      background: #e3f2fd;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .chat-message {
+      max-width: 75%;
+      padding: 10px 14px;
+      margin: 6px 0;
+      border-radius: 15px;
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+
+    .chat-message.bot {
+      background: #ffffff;
+      align-self: flex-start;
+      border-bottom-left-radius: 0;
+      color: #333;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .chat-message.user {
+      background: #4fc3f7;
+      align-self: flex-end;
+      border-bottom-right-radius: 0;
+      color: white;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    /* Input area */
+    .chat-input {
+      display: flex;
+      padding: 10px;
+      background: #fafafa;
+      border-top: 1px solid #ddd;
+    }
+
+    .chat-input input {
+      flex: 1;
+      border: none;
+      border-radius: 20px;
+      padding: 12px 15px;
+      font-size: 0.95rem;
+      outline: none;
+      background: #f1f1f1;
+    }
+
+    .chat-input button {
+      border: none;
+      background: #0288d1;
+      color: white;
+      padding: 12px 18px;
+      margin-left: 8px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .chat-input button:hover {
+      background: #0277bd;
+    }
+  </style>
+</head>
+<body>
+  <div class="chat-container">
+    <div class="chat-header">💬 Hotel Support</div>
+
+    <div class="chat-messages" id="chatMessages">
+      <div class="chat-message bot">
+        Hello 👋! I can help with booking, payments, cancellations, room service, parking, or shuttle service.
+      </div>
+    </div>
+
+    <div class="chat-input">
+      <input type="text" id="chatInput" placeholder="Type your message...">
+      <button onclick="sendMessage()">➤</button>
+    </div>
+  </div>
+
+  <script>
+    const chatMessages = document.getElementById("chatMessages");
+    const chatInput = document.getElementById("chatInput");
+
+    const faqs = {
+      "book": "You can book a room directly through our website by selecting dates, choosing your room type, and completing the payment securely online.",
+      "payment": "We accept all major credit/debit cards, online banking, and mobile payment options. Cash payments can also be made at the front desk.",
+      "cancel": "Yes, you can cancel or modify your booking from 'My Reservations' or by contacting customer support. Please check our cancellation policy for charges.",
+      "room service": "Yes, 24/7 room service is available. You can order meals, snacks, and drinks from your room.",
+      "parking": "Yes, we provide free on-site parking for all guests. Valet parking is also available on request.",
+      "shuttle": "Yes, we offer airport shuttle service at an additional cost. Please schedule in advance by contacting the front desk."
+    };
+
+    function addMessage(text, sender) {
+      const message = document.createElement("div");
+      message.classList.add("chat-message", sender);
+      message.textContent = text;
+      chatMessages.appendChild(message);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function sendMessage() {
+      const userText = chatInput.value.trim();
+      if (userText === "") return;
+
+      addMessage(userText, "user");
+
+      let response = "Sorry, I can only answer questions related to booking, payments, cancellations, room service, parking, and shuttle service.";
+
+      for (let key in faqs) {
+        if (userText.toLowerCase().includes(key)) {
+          response = faqs[key];
+          break;
+        }
+      }
+
+      setTimeout(() => addMessage(response, "bot"), 500);
+      chatInput.value = "";
+    }
+
+    chatInput.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") sendMessage();
+    });
+  </script>
+</body>
+</html>

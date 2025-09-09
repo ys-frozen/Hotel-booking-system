@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hotel FAQ</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #E3F2FD, #B2EBF2);
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+
+    header {
+      text-align: center;
+      padding: 30px 20px;
+      color: #004d40;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.2rem;
+    }
+
+    .faq-container {
+      width: 90%;          /* make it take most of the page */
+      max-width: 1200px;   /* limit for very large screens */
+      margin: 40px auto;
+      background: white;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    }
+
+    .faq-item {
+      border-bottom: 1px solid #ddd;
+    }
+
+    .faq-question {
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 1.1rem;
+      padding: 18px;
+      transition: background 0.3s;
+    }
+
+    .faq-question:hover {
+      background: #f1f1f1;
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+      font-size: 0.95rem;
+      color: #555;
+      padding: 0 18px;
+    }
+
+    .faq-item.active .faq-answer {
+      max-height: 300px;
+      padding: 12px 18px;
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin: 20px auto;
+      text-decoration: none;
+      background: #0288d1;
+      color: white;
+      padding: 12px 25px;
+      border-radius: 10px;
+      transition: background 0.3s;
+    }
+
+    .back-btn:hover {
+      background: #0277bd;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Frequently Asked Questions</h1>
+  </header>
+
+  <div class="faq-container">
+    <div class="faq-item">
+      <div class="faq-question">How do I book a room online?</div>
+      <div class="faq-answer">
+        You can book a room directly through our website by selecting your check-in and check-out dates, choosing your room type, and completing the payment process securely online.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">What payment methods are accepted?</div>
+      <div class="faq-answer">
+        We accept all major credit/debit cards, online banking, and mobile payment options. Cash payments can also be made at the front desk.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">Can I cancel or modify my reservation?</div>
+      <div class="faq-answer">
+        Yes, you can cancel or modify your booking from the "My Reservations" page or by contacting customer support. Please check our cancellation policy for details on applicable charges.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">Do you offer room service?</div>
+      <div class="faq-answer">
+        Yes, 24/7 room service is available. You can order meals, snacks, and beverages directly from your room using the in-room service menu or by contacting reception.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">Is parking available at the hotel?</div>
+      <div class="faq-answer">
+        Yes, we provide complimentary on-site parking for all our guests. Valet parking is also available upon request.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">Do you have airport shuttle service?</div>
+      <div class="faq-answer">
+        Yes, we offer airport shuttle services at an additional cost. Please schedule in advance by contacting our front desk.
+      </div>
+    </div>
+  </div>
+
+  <div style="text-align:center;">
+    <a href="help and support.html" class="back-btn">⬅ Back </a>
+  </div>
+
+  <script>
+    const faqs = document.querySelectorAll('.faq-item');
+    faqs.forEach(item => {
+      item.querySelector('.faq-question').addEventListener('click', () => {
+        item.classList.toggle('active');
+      });
+    });
+  </script>
+</body>
+</html>

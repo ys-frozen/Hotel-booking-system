@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Reservation | Home</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background: linear-gradient(to right, #E3F2FD, #B2EBF2), url('bg.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #333;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            width: 100%;
+            background: linear-gradient(to right, #90CAF9, #4DD0E1);
+            box-sizing: border-box;
+        }
+        .header-title {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .header-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        .login-btn {
+            display: inline-block;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none; /* Removes underline */
+            text-align: center;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.7);
+        }
+        nav ul li {
+            margin: 0 15px;
+        }
+        nav ul li a {
+            text-decoration: none;
+            font-weight: bold;
+            color: #000;
+        }
+        .hotel-grid {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        .hotel-card {
+            width: 30%;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 15px;
+            margin: 10px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-title">Hotel Booking System</div>
+        <div class="header-buttons">
+            <a href="login.html" class="login-btn">Login</a>
+        </div>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="home">Home</a></li>
+            <li><a href="rooms.html">Room Reservation</a></li>
+            <li><a href="service.html">Room Service request</a></li>
+            <li><a href="billing.html">Billing and Payment</a></li>
+            <li><a href="feedback.html">Feedback</a></li>
+            <li><a href="help and support.html">Help &Support</a></li>
+        </ul>
+    </nav>
+    <section id="search-bar" style="text-align: center;">
+        <h2>Find Your Perfect Stay</h2>
+        <form>
+            <input type="text" placeholder="Enter destination" required>
+            <input type="date" required>
+            <select required>
+                <option value="1">1 Guest</option>
+                <option value="2">2 Guests</option>
+                <option value="3">3 Guests</option>
+                <option value="4+">4+ Guests</option>
+            </select>
+            <button type="submit">Search</button>
+        </form>
+    </section>
+    <section id="featured-hotels">
+        <h2>Luxury Inn</h2>
+        <div class="hotel-grid">
+            <div class="hotel-card"><img src="hotel1.jpeg"><h3>Room 1</h3><p>Price: $99</p></div>
+            <div class="hotel-card"><img src="hotel2.jpeg"><h3>Room 2</h3><p>Price: $110</p></div>
+            <div class="hotel-card"><img src="hotel3.jpeg"><h3>Room 3</h3><p>Price: $120</p></div>
+        </div>
+        <h2>Urban Escape</h2>
+        <div class="hotel-grid">
+            <div class="hotel-card"><img src="hotel4.jpeg"><h3>Room 1</h3><p>Price: $130</p></div>
+            <div class="hotel-card"><img src="hotel5.jpeg"><h3>Room 2</h3><p>Price: $140</p></div>
+            <div class="hotel-card"><img src="hotel6.jpeg"><h3>Room 3</h3><p>Price: $150</p></div>
+        </div>
+        <h2>Seaside Retreat</h2>
+        <div class="hotel-grid">
+            <div class="hotel-card"><img src="hotel7.jpeg"><h3>Room 1</h3><p>Price: $160</p></div>
+            <div class="hotel-card"><img src="hotel8.jpeg"><h3>Room 2</h3><p>Price: $170</p></div>
+            <div class="hotel-card"><img src="hotel9.jpeg"><h3>Room 3</h3><p>Price: $180</p></div>
+        </div>
+    </section>
+    <footer>
+        <p>&copy; 2025 Hotel Reservation. All rights reserved.</p>
+    </footer>
+</body>
+</html>

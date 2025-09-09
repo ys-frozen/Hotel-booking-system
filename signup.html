@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: linear-gradient(to right, #E3F2FD, #B2EBF2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            color: black;
+            text-align: center;
+        }
+        input, button {
+            display: block;
+            width: 90%;
+            padding: 10px;
+            margin: 10px auto; 
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-align: center;
+        }
+        button {
+            background-color: #ff9800;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+        }
+        button:hover {
+            background-color: #e68900;
+        }
+        .user-info {
+            display: none;
+            background: white;
+            color: black;
+            padding: 15px;
+            margin-top: 10px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+            display: none;
+        }
+    </style>
+    <script>
+        function submitForm() {
+            var name = document.getElementById("name").value;
+            var email = document.getElementById("email").value;
+            var phone = document.getElementById("phone").value;
+            var password = document.getElementById("password").value;
+            var confirmPassword = document.getElementById("confirmPassword").value;
+            var errorMessage = document.getElementById("error-message");
+
+            if (!name || !email || !phone || !password || !confirmPassword) {
+                alert("Please fill in all fields.");
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                errorMessage.style.display = "block";
+                return;
+            } else {
+                errorMessage.style.display = "none";
+            }
+
+            localStorage.setItem('userName', name);
+            localStorage.setItem('userEmail', email);
+            localStorage.setItem('userPhone', phone);
+            localStorage.setItem('userPassword', password);
+
+            document.getElementById("displayUserName").innerText = name;
+            document.getElementById("displayUserEmail").innerText = email;
+            document.getElementById("displayUserPhone").innerText = phone;
+            document.getElementById("userInfo").style.display = "block";
+
+            document.getElementById("signupForm").style.display = "none";
+
+            setTimeout(function() {
+                window.location.href = 'welcome.html';
+            }, 5000);
+        }
+    </script>
+</head>
+<body>
+    <div class="container" id="signupForm">
+        <h2>Sign Up</h2>
+        <form onsubmit="event.preventDefault(); submitForm();">
+            <input type="text" id="name" placeholder="Name" required>
+            <input type="email" id="email" placeholder="Email" required>
+            <input type="tel" id="phone" placeholder="Phone Number" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+            <p id="error-message" class="error">Passwords do not match!</p>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <div class="user-info" id="userInfo">
+        <h3>Submitted Information:</h3>
+        <p><strong>Name:</strong> <span id="displayUserName"></span></p>
+        <p><strong>Email:</strong> <span id="displayUserEmail"></span></p>
+        <p><strong>Phone:</strong> <span id="displayUserPhone"></span></p>
+        <p>Redirecting to the welcome page in 5 seconds...</p>
+    </div>
+</body>
+</html>
